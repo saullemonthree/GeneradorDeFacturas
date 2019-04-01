@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Facturas</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <style>
+        /*.img, .info{
+            display: inline;
+        }*/
+        .img {
+            /*width:100px;*/
+            display: block;
+            float: left;
+            margin-left: 2cm;
+            width: 10cm;
+            margin-bottom: .5cm;
+            margin-top: .5cm;
+        }
+
+        .info {
+            display: block;
+            float: right;
+            width: 7cm;
+            margin-right: 2cm;
+            margin-top: .5cm;
+        }
+
+        .margin {
+            margin-left: 2cm;
+            margin-right: 2cm;
+        }
+
+        .superiorHr {
+            color: #dcdcdc;
+            width: 20cm
+        }
+
+        .inferiorHr {
+            color: #4bdc47;
+            width: 20cm
+        }
+
+        .contact_info {
+            display: block;
+        }
+
+        .title {
+            margin-bottom: .2cm;
+        }
+
+        .fiscal_info {
+            display: block;
+            float: left;
+            margin-left: 2cm;
+            width: 13cm;
+            margin-top: .1cm;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div id="submitFile">
+    <input type="file" id="file-input"/>
+    <h3>Contenido del archivo:</h3>
+</div>
+<div class="img">
+    <img src="img/qualia.png" width="150" height="50">
+</div>
+<div class="info">
+    <span class="contact_info">(+52) 614 389 84 08</span>
+    <span class="contact_info"> www.qualia.com.mx</span>
+    <span class="contact_info"> hola@qualia.com.mx</span>
+</div>
+<hr class="margin superiorHr" size="3" noshade="noshade">
+<h1 class="margin title">Recibo de nómina</h1>
+<hr class="margin inferiorHr" size="3" noshade="noshade">
+<div class="fiscal_info">
+    <span class="contact_info">QUALIA CHIHUAHUA S.A.P.I. DE C.V.</span>
+    <span class="contact_info">RFC: QCI180515PC6</span>
+    <span class="contact_info">IMSS: Z4210588100</span>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <span>Fecha de pago</span>
+            </th>
+            <th>
+                <span>Fecha de creación</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                2019-07-22
+            </td>
+            <td>
+                2019-07-30
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    var xml;
+
+    function leerArchivo(e) {
+        var archivo = e.target.files[0];
+        if (!archivo) {
+            return;
+        }
+        var lector = new FileReader();
+        lector.onload = function (e) {
+            var contenido = e.target.result;
+
+            xml = $.parseXML(contenido);
+
+            console.log(xml.getElementsByTagName("cfdi:Emisor")[0].getAttribute("Rfc"));
+            var percepciones = xml.getElementsByTagName("nomina12:Percepcion");
+            for (var i = 0; i < percepciones.length; i++) {
+                var percepcion = percepciones[i];
+                switch (percepcion.getAttribute("Clave")) {
+                    case "101":
+                        console.log(percepcion.getAttribute("Concepto") + ": " + percepcion.getAttribute("ImporteGravado"));
+                        break;
+                    case "104":
+                        console.log(percepcion.getAttribute("Concepto") + ": " + percepcion.getAttribute("ImporteGravado") + ", Importe Pagado:" +
+                            percepcion.getElementsByTagName("nomina12:HorasExtra")[0].getAttribute("ImportePagado"));
+                        break;
+                    case "0BA":
+                        console.log(percepcion.getAttribute("Concepto") + ": " + percepcion.getAttribute("ImporteGravado"));
+                        break;
+                    case "0BP":
+                        console.log(percepcion.getAttribute("Concepto") + ": " + percepcion.getAttribute("ImporteGravado"));
+                        break;
+                }
+            }
+        };
+        lector.readAsText(archivo);
+    }
+
+    document.getElementById('file-input')
+        .addEventListener('change', leerArchivo, false);
+</script>
+</html>
