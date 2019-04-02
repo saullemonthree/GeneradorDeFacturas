@@ -12,8 +12,8 @@
             /*width:100px;*/
             display: block;
             float: left;
-            margin-left: 2cm;
-            width: 10cm;
+            margin-left: 1.69cm;
+            width: 7cm;
             margin-bottom: .5cm;
             margin-top: .5cm;
         }
@@ -21,14 +21,12 @@
         .info {
             display: block;
             float: right;
-            width: 7cm;
-            margin-right: 2cm;
             margin-top: .5cm;
         }
 
         .margin {
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-left: 1.69cm;
+            margin-right: 1.69cm;
         }
 
         .superiorHr {
@@ -52,57 +50,168 @@
         .fiscal_info {
             display: block;
             float: left;
-            margin-left: 2cm;
-            width: 13cm;
+            margin-left: 1.69cm;
+            width: 11cm;
             margin-top: .1cm;
             font-weight: 600;
+        }
+
+        .dates {
+            float: right;
+        }
+
+        .tableDates{
+            width: 8.8cm;
+        }
+        .tableDates > thead > tr > th{
+            width: 4.4cm;
+        }
+
+        .tableDates > thead > tr > th{
+            width: 4.4cm;
+        }
+
+        body {
+            width: 21.6cm;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            -webkit-print-color-adjust:exact;
+            background: #cccccb;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+        .clearfix:after {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+        .clearfix {
+            display: inline-block;
+        }
+        .clearfix {
+            display: block;
+        }
+        .perception {
+margin-left: ;
         }
     </style>
 </head>
 <body>
-<div id="submitFile">
-    <input type="file" id="file-input"/>
-    <h3>Contenido del archivo:</h3>
-</div>
 <div class="img">
-    <img src="img/qualia.png" width="150" height="50">
+    <img src="img/qualia.png" width="200" height="60">
 </div>
 <div class="info">
-    <span class="contact_info">(+52) 614 389 84 08</span>
-    <span class="contact_info"> www.qualia.com.mx</span>
-    <span class="contact_info"> hola@qualia.com.mx</span>
+    <span class="contact_info"><img src="img/green-phone.png" width="82" height="14"><span>&nbsp;</span><img
+            src="img/phone.png" width="14" height="14">&nbsp;&nbsp;(+52) 614 389 84 08</span>
+    <span class="contact_info"><img src="img/green-page.png" width="48" height="14"><span>&nbsp;</span><img
+            src="img/page.png" width="14" height="14">&nbsp;&nbsp;www.qualia.com.mx</span>
+    <span class="contact_info"><img src="img/green-email.png" width="18" height="14"><span>&nbsp;</span><img
+            src="img/email.png" width="14" height="13">&nbsp;&nbsp;hola@qualia.com.mx</span>
 </div>
 <hr class="margin superiorHr" size="3" noshade="noshade">
 <h1 class="margin title">Recibo de nómina</h1>
 <hr class="margin inferiorHr" size="3" noshade="noshade">
-<div class="fiscal_info">
-    <span class="contact_info">QUALIA CHIHUAHUA S.A.P.I. DE C.V.</span>
-    <span class="contact_info">RFC: QCI180515PC6</span>
-    <span class="contact_info">IMSS: Z4210588100</span>
-</div>
 <div>
+    <div class="fiscal_info">
+        <span class="contact_info">QUALIA CHIHUAHUA S.A.P.I. DE C.V.</span>
+        <span class="contact_info">RFC: QCI180515PC6</span>
+        <span class="contact_info">IMSS: Z4210588100</span>
+    </div>
+    <div class="dates">
+        <table class="tableDates" style="margin-top: 50px">
+            <thead>
+            <tr>
+                <th>
+                    <span>Fecha de pago</span>
+                </th>
+                <th>
+                    <span>Fecha de creación</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    2019-07-22
+                </td>
+                <td>
+                    2019-07-30
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="tableDates">
+            <thead>
+            <tr>
+                <th>
+                    <span>Frecuencia de pago</span>
+                </th>
+                <th>
+                    <span>Periodo de pago</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    2019-07-22
+                </td>
+                <td>
+                    2019-07-30
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="perception">
     <table>
         <thead>
         <tr>
             <th>
-                <span>Fecha de pago</span>
+                <span></span>
             </th>
             <th>
-                <span>Fecha de creación</span>
+                <span>Seguridad social</span>
             </th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>
-                2019-07-22
+                Nombre:
+                Puesto:
+                Depto.:
+                RFC:
+                CURP:
             </td>
             <td>
-                2019-07-30
+                Registro:
+                Tipo de salario:
+                Salario integrado:
+                Jornada:
+                Fecha de ingreso:
             </td>
         </tr>
         </tbody>
     </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div id="submitFile">
+    <input type="file" id="file-input"/>
 </div>
 </body>
 <script>
