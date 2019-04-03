@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Generador de Facturas</title>
-    <script src="js/jquery-3.3.1.min.js"></script>
     <style>
         /* cyrillic-ext */
         @font-face {
@@ -150,11 +149,74 @@
         }
         .perception > table > tbody > tr {
             height: 25px;
-
         }
         .perception > table > tbody > tr > td{
             border-left: 1px solid black;
 
+        }
+
+        .divTitle {
+            -webkit-print-color-adjust:exact;
+            background: #cccccb;
+            height: 25px;
+            border: 1px solid black;
+            display: inline-block;
+            text-align: center;
+        }
+        .titlePerception {
+            width: 6.03cm;
+            margin: 5px 0 5px 1.43cm;
+        }
+        .titleAmount, .titleUnity{
+            width: 2.4cm;
+            margin: 5px 0 5px 0;
+        }
+        .titleRetention {
+            width: 3.7cm;
+            margin: 5px 0 5px 0cm;
+        }
+        .verticalCenter {
+            vertical-align: middle;
+        }
+        .perceptions {
+            width: 20.1cm;
+            height: 3.51cm;
+            border: 1px solid black;
+            margin-left: 1.43cm;
+        }
+        .signature {
+            height: 3.9cm;
+            width: 11.45cm;
+            border: 1px solid black;
+            display: inline-block;
+            margin-left: 1.43cm;
+            margin-top: 5px;
+        }
+        .totals {
+            height: 3.9cm;
+            width: 8.5cm;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        .originalString {
+            height: 3.3cm;
+            width: 20.1cm;
+            border: 1px solid black;
+            margin-left: 1.43cm;
+        }
+        .disclaimer {
+            height: 1.3cm;
+            width: 20.1cm;
+            border: 1px solid black;
+            margin-left: 1.43cm;
+            font-size: 10px;
+        }
+        .disclaimer>span {
+            display: block;
+            margin: 2px 2px 2px 2px;
+        }
+        .disclaimer>span:first-child {
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -283,6 +345,42 @@
         </tbody>
     </table>
 </div>
+<div class="clearfix"></div>
+<div class="divTitle titlePerception">
+    <span class="verticalCenter">Percepción</span>
+</div>
+<div class="divTitle titleAmount">
+    <span class="verticalCenter">Monto</span>
+</div>
+<div class="divTitle titleUnity">
+    <span class="verticalCenter">Unidades</span>
+</div>
+<div class="divTitle titleRetention">
+    <span class="verticalCenter">Retención</span>
+</div>
+<div class="divTitle titleAmount">
+    <span class="verticalCenter">Monto</span>
+</div>
+<div class="divTitle titleUnity">
+    <span class="verticalCenter">Unidades</span>
+</div>
+<div class="perceptions">
+
+</div>
+<div class="signature">
+
+</div>
+<div class="totals">
+
+</div>
+<div class="originalString">
+    <div id="qrcode"></div>
+</div>
+<div class="disclaimer">
+    <span>Este documento es una representación impresa de un CFDI. Régimen fiscal del emisor: General de Ley Personas Morales</span>
+    <span>Folio del SAT: FOLIOOO FOLIOOOOO Fecha de emisión: 01/01/2012 12:56:56 Fecha de certificación: 01/Feb./2019 13:11:49</span>
+    <span>Lugar: 31213 Certificado del emisor: 00001000000412011030 Certificado del SAT: 00001000000401041203</span>
+</div>
 <br>
 <br>
 <br>
@@ -291,10 +389,18 @@
     <input type="file" id="file-input"/>
 </div>
 </body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/qrcode.min.js"></script>
 <script>
+
     var xml;
 
     function leerArchivo(e) {
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx&id=F7C0E3BC-B09D-482F-881E-3F6B063DED31&re=AAA010101AAA&rr=XXX010101XXA&tt=125.6&fe=A1345678",
+            width: 100,
+            height: 100,
+        });
         var archivo = e.target.files[0];
         if (!archivo) {
             return;
